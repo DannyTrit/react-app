@@ -1,0 +1,9 @@
+.person img {
+    height: 50px;
+    width: 50px;
+    border-radius: 25px;
+}
+
+.post {
+    padding-top: 10px;
+}

@@ -1,0 +1,22 @@
+.content {
+    display: grid;
+    grid-template-columns: 2fr 10fr;
+}
+
+.dialogs {
+    padding: 10px;
+}
+
+.dialog {
+
+}
+
+.message {
+    padding-left: 20px;
+}
+
+.navlinkActive {
+    color:brown ;
+    background-color: aqua;
+    background-size: 40px;
+}
