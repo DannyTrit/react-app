@@ -1,17 +1,11 @@
 import {API} from "../../api/api";
-
 const ADD_POST = "ADD-POST";
 const SET_USER_PROFILE = "SET-USER-PROFILE";
 
-
-//profile page
 const initialState = {
-	posts: [{id: 0, sender: "Vick", text: "That was hard", likeCount: 10}, {
-		id: 1,
-		sender: "Mike",
-		text: "Rly man?",
-		likeCount: 4
-	}, {id: 2, sender: "Jessy", text: "Fuck that!", likeCount: 17}],
+	posts: [{id: 0, sender: "Vick", text: "That was hard", likeCount: 10},
+		{id: 1, sender: "Mike", text: "Rly man?", likeCount: 4}
+	],
 	profile: null
 }
 
@@ -22,7 +16,7 @@ const profileReducer = (state = initialState, action) =>
 		case ADD_POST:
 		{
 			let post = {id: state.posts.length,
-				sender: "Jessy",
+				sender: state.profile.fullName,
 				text: action.text,
 				likeCount: 0,
 			};

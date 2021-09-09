@@ -9,20 +9,28 @@ import LoginContainer from "./components/Login/LoginContainer";
 import {connect} from "react-redux";
 import {getAuthData} from "./redux/reducers/authReducer";
 import {useEffect} from "react";
+import Preloader from "./components/common/Preloader/Preloader";
 
 const App = (props) =>
 {
-	useEffect(props.getAuthData,[props.userID])
+	useEffect(() => {
+		props.getAuthData();
+	},[]);
+
+	console.log(`${props.isAuth} ${props.userID}`)
+	if(props.isFetching)
+		return <Preloader/>
 	return (
 		<div className="app-wrapper">
+
 			<HeaderContainer />
-			<Navbar/>
+			<Navbar userID={props.userID} />
 			<div className="app-wrapper-content">
 				<Route path="/profile/:id" render={() => <ProfileContainer/>}/>
 				<Route path="/messages" render={() => <MessagesContainer/>}/>
 				<Route path="/users" render={() => <UsersContainer/>}/>
 				<Route path="/login" render={() => <LoginContainer/>}/>
-				<Route exact patch="*" render={() => props.isAuth ? <Redirect to={`/profile/${props.userID}`}/> : <Redirect to="/login"/> }/>
+				<Route render={() => props.isAuth ? <Redirect to={`/profile/${props.userID}`}/> : <Redirect to="/login"/> }/>
 			</div>
 		</div>);
 }
@@ -30,7 +38,8 @@ const App = (props) =>
 const mapStateToProps = (state) =>
 ({
 	isAuth: state.auth.isAuth,
-	userID: state.auth.userID
+	userID: state.auth.userID,
+	isFetching: state.auth.isFetching
 })
 
 export default connect(	mapStateToProps,{getAuthData})(App);

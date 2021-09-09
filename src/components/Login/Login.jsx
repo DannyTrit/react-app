@@ -16,7 +16,6 @@ const Login = (props) =>
 		password: Yup.string()
 		.required('Required'),
 	})
-
 	return (
 		<div>
 			{props.isAuth && <Redirect to="/profile"/>}

@@ -49,7 +49,7 @@ const ProfileInfo = (props) =>
 						<div className={hasContacts || style.hidden}>Contacts
 							{Object.keys(props.contacts).map(key =>
 							{
-								return <div className={props.contacts[key] || style.hidden}>{key}: {props.contacts[key]}</div>
+								return <div key={key} className={props.contacts[key] || style.hidden}>{key}: {props.contacts[key]}</div>
 							})}
 						</div>
 					</div>
@@ -93,7 +93,6 @@ const ProfileInfo = (props) =>
 					}}
 					onReset={(values, {resetForm}) =>
 					{
-						console.log("RESET");
 						setEditMode(false);
 					}}
 				>
