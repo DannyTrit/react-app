@@ -1,13 +1,5 @@
 import axios from "axios";
 
-const axiosInstance = axios.create(
-	{
-		baseURL: "http://localhost:3001/",
-		//withCredentials: true,
-		//headers: { "API-KEY": "0000-0000-0000-0000" },
-	}
-);
-
 const instance = axios.create(
 	{
 		baseURL: "https://social-network.samuraijs.com/api/1.0/",
@@ -19,7 +11,7 @@ const instance = axios.create(
 export const API = {
 	getUsers(page = 1, pageSize = 10)
 	{
-		return instance.get(`users?page=${page}&count=${Math.min([pageSize, 100])}`).then(response => response.data);
+		return instance.get(`users?page=${Math.max(page, 1)}&count=${Math.min(Math.max(pageSize, 1), 100)}`).then(response => response.data);
 	},
 	unfollow(userID)
 	{
@@ -30,10 +22,6 @@ export const API = {
 		return instance.post(`follow/${userID}`).then(response => response.data);
 	},
 
-	getAuth()
-	{
-		return instance.get(`auth/me`);
-	},
 	getProfile(userID)
 	{
 		return instance.get(`profile/${userID}`).then(response => response.data);
@@ -42,24 +30,29 @@ export const API = {
 	{
 		return instance.put(`profile`, data);
 	},
+	getStatus(userID)
+	{
+		return instance.get(`profile/status/${userID}`).then(response => response.data);
+	},
+	setStatus(data)
+	{
+		return instance.put(`profile/status`, data);
+	},
+	setPhoto(file)
+	{
+		const formData = new FormData();
+		formData.append("image", file);
+		return instance.put(`/profile/photo`, formData, {
+			headers: {
+				"Content-Type": "multipart/form-data"
+			}
+		}).then(response => response.data);
+	},
 
-	/*
-	userId: required(integer)
-	lookingForAJob: required(boolean)
-	lookingForAJobDescription: required(string)
-	fullName: required(string)
-	contacts: required(object)
-		github: required(string)
-		vk: required(string)
-		facebook: required(string)
-		instagram: required(string)
-		twitter: required(string)
-		website: required(string)
-		youtube: required(string)
-		mainLink: required(string)
-	 */
-
-	//email = "lenik47250@drlatvia.com", password = "free"
+	getAuth()
+	{
+		return instance.get(`auth/me`);
+	},
 	logIn(email, password)
 	{
 		return instance.post(`auth/login`, {email, password});

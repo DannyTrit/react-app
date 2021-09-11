@@ -1,30 +1,25 @@
 import {connect} from "react-redux";
-import React, {useEffect} from "react";
-import {
-	follow, getUsers,
-	setCurrentPage,
-	unfollow
-} from "../../redux/reducers/usersReducer";
+import React, {useEffect, useState} from "react";
+import {	follow, getUsers, unfollow } from "../../redux/reducers/usersReducer";
 import Users from "./Users";
 import Preloader from "../common/Preloader/Preloader";
 import {compose} from "redux";
 import {withAuthRedirect} from "../../HOCs/redirect/withAuthRedirect";
+import Paginator from "../common/Paginator/Paginator";
 
-const UsersContainer = (props) =>
+const UsersContainer = ({currentPage, totalUsersCount, pageSize, getUsers, ...props}) =>
 {
-	useEffect(() => {
-		props.getUsers(props.currentPage, props.pageSize);
-	}, [props.currentPage])
-
-	const selectPage = (page) =>
+	let [page, setActualPage] = useState(currentPage);
+	useEffect(() =>
 	{
-		props.setCurrentPage(page);
-	}
-	return (
-		<> {this.props.isLoading && <Preloader/>}
-			<Users {...this.props} selectPage={this.selectPage}/>
-		</>
-	)
+		getUsers(page, pageSize);
+	}, [page]);
+
+	return (<>
+		<Paginator currentPage={currentPage} totalItemsCount={totalUsersCount} pageSize={pageSize} portionSize={6} onPageChanged={setActualPage} />
+		{props.isFetching ? <Preloader/> : <Users {...props}/>}
+	</>)
+
 }
 
 const mapStateToProps = (state) => ({
@@ -32,12 +27,15 @@ const mapStateToProps = (state) => ({
 	totalUsersCount: state.usersPager.totalUsersCount,
 	pageSize: state.usersPager.pageSize,
 	currentPage: state.usersPager.currentPage,
-	isLoading: state.usersPager.isLoading
+	isFetching: state.usersPager.isFetching,
+	usersFollowingInProgress: state.usersPager.usersFollowingInProgress
 })
 
 export default compose(
 	connect(mapStateToProps, {
-		follow, unfollow, setCurrentPage, getUsers
+		follow,
+		unfollow,
+		getUsers
 	}),
 	withAuthRedirect
 )(UsersContainer)

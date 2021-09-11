@@ -1,19 +1,21 @@
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
+import ProfilePhoto from "./ProfilePhoto/ProfilePhoto";
 
-const Profile = ({profile, setProfile}) =>
+const Profile = ({profile, setProfile, status, setStatus, isMyProfile, setPhoto}) =>
 {
-    return(
+    return (
         <div className="content">
-           {/*<ProfileStatus/>*/}
-            <ProfileInfo aboutMe={profile.aboutMe}
+            <ProfilePhoto setPhoto={setPhoto} isMyProfile={isMyProfile} photos={profile.photos}/>
+            <ProfileStatus status={status} setStatus={setStatus} isMyProfile={isMyProfile}/>
+            <ProfileInfo isMyProfile={isMyProfile}
+                         aboutMe={profile.aboutMe}
                          userID={profile.userId}
                          lookingForAJob={profile.lookingForAJob}
                          skills={profile.lookingForAJobDescription}
                          name={profile.fullName}
                          contacts={profile.contacts}
-                         photos={profile.photos}
                          setProfile={setProfile}
             />
             <MyPostsContainer />

@@ -5,12 +5,12 @@ import NewMessage from "./NewMessage/NewMessage";
 const Messages = (props) =>
 {
 	let dialogs = props.dialogs.map(item =>
-		<div className={styleClasses.dialog}>
+		<div key={item.sender.id} className={styleClasses.dialog}>
 			<NavLink to={`/messages/${item.sender.id}`} activeClassName={styleClasses.navlinkActive}>{item.sender.name}</NavLink>
 		</div>
 	);
 	let messages = props.dialogs.map(item =>
-		<Route path={`/messages/${item.sender.id}`} render={
+		<Route key={item.sender.id} path={`/messages/${item.sender.id}`} render={
 			() => item.messages.map(mes => <div className={styleClasses.message}>{mes.text}</div>)
 		} />
 	);

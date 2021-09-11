@@ -19,6 +19,7 @@ const ProfileInfo = (props) =>
 		}
 		else if(resultCode > 0)
 		{
+			//TODO: change error notification
 			alert("some error");
 		}
 	},[resultCode])
@@ -37,9 +38,9 @@ const ProfileInfo = (props) =>
 	}
 	return (
 		<div>
-			{!editMode ?
+			{!editMode  ?
 				<div>
-					<button onClick={activateEditMode}>Edit</button>
+					{props.isMyProfile && <button onClick={activateEditMode}>Edit</button>}
 					<div>{props.name}</div>
 					<span onClick={ChangeFullInfoVisibility}>{isFullInfoVisible ? "Hide" : "Show"} full information</span>
 					<div className={isFullInfoVisible || style.hidden}>

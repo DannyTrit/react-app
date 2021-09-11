@@ -18,7 +18,7 @@ const Login = (props) =>
 	})
 	return (
 		<div>
-			{props.isAuth && <Redirect to="/profile"/>}
+			{props.isAuth && <Redirect to={`/profile/${props.userID}`}/>}
 			<Formik
 				initialValues={initialValues}
 				onSubmit={(values,{resetForm}) => {

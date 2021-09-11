@@ -1,0 +1,16 @@
+.selectedPage {
+    font-weight: bold;
+    background-color: darkgrey;
+}
+.pageNumber {
+    display: inline-block;
+    text-align: center;
+    width: 50px;
+    margin: 0 1px ;
+    border: 1px solid black;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.paginatorBody {
+
+}

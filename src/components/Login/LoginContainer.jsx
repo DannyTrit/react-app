@@ -5,6 +5,7 @@ import {logIn} from "../../redux/reducers/authReducer";
 
 const mapStateToProps = (state) =>
 ({
-	isAuth: state.auth.isAuth
+	isAuth: state.auth.isAuth,
+	userID: state.auth.userID
 })
 export default connect(mapStateToProps, {logIn})(Login)

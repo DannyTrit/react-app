@@ -1,46 +1,49 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {connect} from "react-redux";
 import Profile from "./Profile";
-import {getProfile, setProfile} from "../../redux/reducers/profileReducer";
+import {getProfile, requestStatus, setPhoto, setProfile, setStatus} from "../../redux/reducers/profileReducer";
 import {withRouter} from "react-router-dom";
 import {compose} from "redux";
 import Preloader from "../common/Preloader/Preloader";
 import {withAuthRedirect} from "../../HOCs/redirect/withAuthRedirect";
 
-class ProfileContainer extends React.Component
+const ProfileContainer = (props) =>
 {
-	componentDidMount()
-	{
-		let userID = this.props.match.params.id;
+	useEffect(() => {
+		let userID = props.match.params.id;
 
 		if(userID)
 		{
-			this.props.getProfile(userID);
+			props.getProfile(userID);
+			props.requestStatus(userID);
 		}
-	}
+	},[props.match.params.id])
 
-	render()
+	if(!props.profile)
 	{
-		if(!this.props.profile)
-		{
-			return <Preloader/>
-		}
-		return(
-			<div>
-				<Profile profile={this.props.profile} setProfile={this.props.setProfile}/>
-			</div>
-		)
+		return <Preloader/>
 	}
+	return(
+		<div>
+			<Profile isMyProfile={props.authorizedUserID === props.profile.userId}
+						profile={props.profile}
+						setProfile={props.setProfile}
+						status={props.status}
+						setStatus={props.setStatus}
+						setPhoto={props.setPhoto}
+			/>
+		</div>
+	)
+
 }
-
-
 
 let mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
-	userID: state.auth.userID
+	authorizedUserID: state.auth.userID,
+	status: state.profilePage.status
 })
 export default compose(
-	connect(mapStateToProps,{getProfile,setProfile}),
+	connect(mapStateToProps,{getProfile,setProfile, setStatus, requestStatus, setPhoto}),
 	withRouter,
 	withAuthRedirect
 )(ProfileContainer);

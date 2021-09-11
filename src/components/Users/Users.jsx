@@ -1,43 +1,62 @@
 import userDefault from "../../assets/img/UserDefault.png"
 import {NavLink} from "react-router-dom";
-import Paginator from "../common/Paginator/Paginator";
+import style from "./Users.module.css";
+import {memo} from "react";
 
 const Users = (props) =>
 {
+
 	return (
-		<div>
-			<Paginator totalCount={props.totalUsersCount} pageSize={props.pageSize} currentPage={props.currentPage}/>
-			{ props.users.map( user => <User
-				id={user.id}
-				name={user.name}
-				photo={user.photo}
-				isFollowed={user.isFollowed}
-				follow={props.follow}
-				unfollow={props.unfollow}/>)
+		<div className={style.usersBlock}>
+			{props.users.map( user =>
+				 <User key={user.id}
+						 id={user.id}
+						 name={user.name}
+						 status={user.status}
+						 photo={user.photos.small}
+						 followed={user.followed}
+						 follow={props.follow}
+						 unfollow={props.unfollow}
+						 usersFollowingInProgress={props.usersFollowingInProgress}/>)
 			}
 		</div>
 	)
 }
 
-const User = ({id, name, photo, isFollowed, follow, unfollow}) =>
+/*
+id: required(integer)
+name: required(string)
+status: (string)
+photos: {
+	small: (string)
+	large: (string)
+}
+followed: required(boolean)
+ */
+
+const User = memo(({ id, name, status, photo, followed, follow, unfollow, usersFollowingInProgress}) =>
 {
+	debugger;
 	return (
-		<div key={id}>
+		<div className={style.user}>
 			<div>
 				<NavLink to={`/profile/${id}`}>
-					<img src={photo || userDefault} />
+					<img className={style.photo} src={photo || userDefault} />
 				</NavLink>
 			</div>
 			<div>
 				{name}
 			</div>
 			<div>
-				{isFollowed ?
-					<button onClick={() => { unfollow(id) }}>Unfollow</button> :
-					<button onClick={() => { follow(id) }}>Follow</button> }
+				{status}
+			</div>
+			<div>
+				{followed ?
+					<button disabled={usersFollowingInProgress.includes(id)} onClick={() => { unfollow(id) }}>Unfollow</button> :
+					<button disabled={usersFollowingInProgress.includes(id)} onClick={() => { follow(id) }}>Follow</button> }
 			</div>
 		</div>
 	)
-}
+})
 
 export default Users;

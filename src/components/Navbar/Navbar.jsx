@@ -1,12 +1,12 @@
 import styleClasses from "./Navbar.module.css"
 import {NavLink} from "react-router-dom";
 
-const Navbar = () =>
+const Navbar = (props) =>
 {
 	return (
 		<nav className={styleClasses.nav}>
 			<div className={styleClasses.item}>
-				<NavLink to="/profile" activeClassName={styleClasses.navlinkActive}>Profile</NavLink>
+				<NavLink to={`/profile/${props.userID}`} activeClassName={styleClasses.navlinkActive}>Profile</NavLink>
 			</div>
 			<div className={styleClasses.item}>
 				<NavLink to="/messages" activeClassName={styleClasses.navlinkActive}>Messages</NavLink>
