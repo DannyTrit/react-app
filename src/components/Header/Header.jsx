@@ -1,18 +1,22 @@
-import styleClasses from "./Header.module.css"
+import headerStyle from "./Header.module.css"
 import {NavLink} from "react-router-dom";
+import {useState} from "react";
 
 const Header = (props) =>
 {
+	let [logOutIsShown, setLogOutIsShown] = useState(false);
 	return (
-	   <header className={styleClasses.header}>
-				<img src=""/>
+	   <header className={headerStyle.header}>
 
-			<div className={styleClasses.loginBlock}>
-				{props.isAuth ?
-					<button onClick={props.logOut}> {props.login} - Log out</button> :
-					<NavLink to="/login">Login</NavLink>
-				}
+			<div className={headerStyle.loginBlock} onMouseLeave={() => setLogOutIsShown(false)}>
+				{props.isAuth && <div>
+					<span className={headerStyle.login} onClick={() => setLogOutIsShown(true)}>{props.login}</span>
+				</div>}
+				{logOutIsShown && <div>
+					<span className={headerStyle.logOutBtn} onClick={props.logOut}>Log out</span>
+				</div>}
 			</div>
+
 		</header>);
 }
 

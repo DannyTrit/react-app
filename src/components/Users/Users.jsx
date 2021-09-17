@@ -1,47 +1,37 @@
 import userDefault from "../../assets/img/UserDefault.png"
 import {NavLink} from "react-router-dom";
-import style from "./Users.module.css";
+import usersStyle from "./Users.module.css";
 import {memo} from "react";
+import appStyle from "../../App.module.css";
 
 const Users = (props) =>
 {
 
 	return (
-		<div className={style.usersBlock}>
-			{props.users.map( user =>
-				 <User key={user.id}
-						 id={user.id}
-						 name={user.name}
-						 status={user.status}
-						 photo={user.photos.small}
-						 followed={user.followed}
-						 follow={props.follow}
-						 unfollow={props.unfollow}
-						 usersFollowingInProgress={props.usersFollowingInProgress}/>)
-			}
+		<div className={usersStyle.usersPage}>
+			<div className={`${usersStyle.usersBlock} ${appStyle.contentBlock}`}>
+				{props.users.map( user =>
+					 <User key={user.id}
+							 id={user.id}
+							 name={user.name}
+							 status={user.status}
+							 photo={user.photos.small}
+							 followed={user.followed}
+							 follow={props.follow}
+							 unfollow={props.unfollow}
+							 usersFollowingInProgress={props.usersFollowingInProgress}/>)
+				}
+			</div>
 		</div>
 	)
 }
-
-/*
-id: required(integer)
-name: required(string)
-status: (string)
-photos: {
-	small: (string)
-	large: (string)
-}
-followed: required(boolean)
- */
-
 const User = memo(({ id, name, status, photo, followed, follow, unfollow, usersFollowingInProgress}) =>
 {
-	debugger;
 	return (
-		<div className={style.user}>
+		<div className={usersStyle.user}>
 			<div>
 				<NavLink to={`/profile/${id}`}>
-					<img className={style.photo} src={photo || userDefault} />
+					<img className={usersStyle.photo} src={photo || userDefault} />
 				</NavLink>
 			</div>
 			<div>

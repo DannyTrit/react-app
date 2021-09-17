@@ -31,6 +31,7 @@ const ProfileContainer = (props) =>
 						status={props.status}
 						setStatus={props.setStatus}
 						setPhoto={props.setPhoto}
+						isFetching={props.isFetching}
 			/>
 		</div>
 	)
@@ -40,7 +41,8 @@ const ProfileContainer = (props) =>
 let mapStateToProps = (state) => ({
 	profile: state.profilePage.profile,
 	authorizedUserID: state.auth.userID,
-	status: state.profilePage.status
+	status: state.profilePage.status,
+	isFetching: state.profilePage.isFetching
 })
 export default compose(
 	connect(mapStateToProps,{getProfile,setProfile, setStatus, requestStatus, setPhoto}),

@@ -1,0 +1,26 @@
+.appWrapper {
+    display: grid;
+    width: 1200px;
+    grid-template-areas:
+            "header header"
+            "navbar content";
+    grid-template-rows: 60px 1fr;
+    grid-template-columns: auto 1fr;
+    margin: 0 auto;
+}
+.pageBody {
+    grid-area: content;
+}
+a {
+    text-decoration: none;
+}
+.contentBlock {
+    border-radius: 5px;
+    background-color: #606365;
+    margin: 5px 5px;
+    padding: 10px
+}
+html {
+    margin-left: calc(100vw - 100%);
+    margin-right: 0;
+}

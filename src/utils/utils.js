@@ -1,7 +1,7 @@
 /**
  * @name updateItemInArray
  * @description Update an item in array of objects
- * @param {*} items
+ * @param {string} items
  * @param {*} itemPropName
  * @param {*} itemPropValue
  * @param {*} newProps

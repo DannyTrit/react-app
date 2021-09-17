@@ -1,3 +1,73 @@
-.hidden {
-    display: none;
+.pageName {
+    padding-left: 15px;
+    font-size: 19px;
+    font-weight: bold;
+}
+.division {
+    margin: 20px 0;
+    position: relative;
+    border-top: 1px solid #858585;
+}
+.divisionName {
+    position: absolute;
+    padding: 5px;
+    top: -20px;
+    background-color: #606365;
+}
+.editModeBtn {
+    background-color: #606365;
+    padding: 5px;
+    position: absolute;
+    top: -20px;
+    right: 0;
+    cursor: pointer;
+}
+.controlBlock {
+    display: flex;
+    padding: 10px;
+}
+.label
+{
+    color: #cbcbcb;
+    display: block;
+    width: 200px;
+    font-size: 15px;
+}
+.input {
+    display: block;
+    background-color: #d6dfe9;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    border: 1px solid #383838;
+    padding: 10px ;
+    width: 400px;
+}
+.textarea {
+    background-color: #d6dfe9;
+    border-radius: 5px;
+    outline: none;
+    font-size: 14px;
+    border: 1px solid #383838;
+    width: 400px;
+    height: 100px;
+    resize: none;
+    padding: 10px;
+}
+.fullInfoBtnBlock {
+    padding: 0 20px;
+    text-align: center;
+}
+.fullInfoBtn {
+    cursor: pointer;
+    padding: 10px;
+    display: block;
+}
+.fullInfoBtn:hover {
+    border-radius: 4px;
+    background-color: #858585;
+}
+.profilePhoto {
+    max-width: 300px;
+    max-height: 300px;
 }

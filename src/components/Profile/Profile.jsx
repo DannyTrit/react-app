@@ -1,14 +1,22 @@
 import MyPostsContainer from "./MyPosts/MyPostsContainer";
 import ProfileInfo from "./ProfileInfo/ProfileInfo";
 import ProfileStatus from "./ProfileStatus/ProfileStatus";
-import ProfilePhoto from "./ProfilePhoto/ProfilePhoto";
+import ProfilePhoto from "./ProfileInfo/ProfilePhoto";
+import profileStyle from "./Profile.module.css"
+import Preloader from "../common/Preloader/Preloader";
 
-const Profile = ({profile, setProfile, status, setStatus, isMyProfile, setPhoto}) =>
+const Profile = ({profile, setProfile, status, setStatus, isMyProfile, setPhoto, isFetching}) =>
 {
+   if(isFetching)
+      return <Preloader/>
+
     return (
-        <div className="content">
+      <div className={profileStyle.profilePageBody}>
+         <div>
             <ProfilePhoto setPhoto={setPhoto} isMyProfile={isMyProfile} photos={profile.photos}/>
-            <ProfileStatus status={status} setStatus={setStatus} isMyProfile={isMyProfile}/>
+            {(status || isMyProfile) && <ProfileStatus status={status} setStatus={setStatus} isMyProfile={isMyProfile}/>}
+         </div>
+         <div>
             <ProfileInfo isMyProfile={isMyProfile}
                          aboutMe={profile.aboutMe}
                          userID={profile.userId}
@@ -18,31 +26,10 @@ const Profile = ({profile, setProfile, status, setStatus, isMyProfile, setPhoto}
                          contacts={profile.contacts}
                          setProfile={setProfile}
             />
-            <MyPostsContainer />
-        </div>
+            <MyPostsContainer isMyProfile={isMyProfile} />
+         </div>
+      </div>
     );
 }
 
 export default Profile;
-
-/*
-aboutMe: null
-userId: required(integer)
-lookingForAJob: required(boolean)
-lookingForAJobDescription: required(string)
-fullName: required(string)
-contacts: {
-	github: required(string)
-	vk: required(string)
-	facebook: required(string)
-	instagram: required(string)
-	twitter: required(string)
-	website: required(string)
-	youtube: required(string)
-	mainLink: required(string)
-}
-photos: {
-	small: null,
-	large: null
-}
-*/

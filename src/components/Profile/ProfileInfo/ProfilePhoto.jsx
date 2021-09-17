@@ -1,4 +1,6 @@
 import userDefault from "../../../assets/img/UserDefault.png";
+import appStyle from "../../../App.module.css";
+import infoStyle from "./ProfileInfo.module.css"
 
 const ProfilePhoto = (props) =>
 {
@@ -9,11 +11,10 @@ const ProfilePhoto = (props) =>
 			props.setPhoto(event.target.files[0]);
 		}
 	}
-	debugger;
 	return (
-		<div>
+		<div className={appStyle.contentBlock}>
 			<div>
-				<img src={props.photos.large || userDefault}/>
+				<img className={infoStyle.profilePhoto} src={props.photos.large || userDefault}/>
 			</div>
 			<div>
 				{props.isMyProfile && <input type="file" onChange={onSelectFile} accept="image/*"/>}

@@ -1,14 +1,19 @@
-.nav {
-    grid-area: n;
-    background-color: aqua;
+.navbar {
+    grid-area: navbar;
     padding: 20px;
+    height: fit-content;
 }
 
 .item {
-    color: mediumblue;
+    padding: 0 4px;
     font-size: 15pt;
 }
-
-.navlinkActive {
-    color: red;
+.item a, a:visited, a:hover {
+    color: aqua;
+    display: block;
+    cursor: pointer;
+}
+.item:hover {
+    background-color: #a9a9a9;
+    border-radius: 4px;
 }

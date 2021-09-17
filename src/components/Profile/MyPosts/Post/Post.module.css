@@ -1,9 +1,17 @@
-.person img {
+.postHeader {
+    display: flex;
+}
+.personPhoto {
     height: 50px;
     width: 50px;
     border-radius: 25px;
 }
-
-.post {
-    padding-top: 10px;
+.personName {
+    font-size: 15px;
+    font-weight: bold;
+    padding-left: 10px;
+    color: #00fdfc;
+}
+.postContent {
+    padding: 5px;
 }

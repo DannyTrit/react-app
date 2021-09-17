@@ -1,0 +1,17 @@
+.profilePageBody {
+    display: grid;
+    grid-template-columns: 330px 730px;
+    justify-content: space-around;
+}
+.profileStatus {
+
+}
+.profileStatusEmpty {
+    color: #a9a9a9;
+    font-size: 8pt;
+}
+.profileStatusFilled {
+    color: #e6ee0f;
+    font-size: 12pt;
+}
+

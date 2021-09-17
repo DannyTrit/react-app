@@ -1,4 +1,7 @@
 import React, {useState} from "react";
+import appStyle from "../../../App.module.css";
+import profileStyle from "../Profile.module.css";
+import statusStyle from "./ProfileStatus.module.css"
 
 const ProfileStatus = (props) =>
 {
@@ -21,10 +24,22 @@ const ProfileStatus = (props) =>
 		setStatus(e.target.value);
 	}
 	return (
-		<div>
+		<div className={`${appStyle.contentBlock}`}>
 			{editMode ?
-				<input onBlur={deactivateEditMode} onChange={onChangeStatus} autoFocus={true} value={status} maxLength="300"/> :
-				<span onClick={activateEditMode}>{props.status || "Set status"}</span>}
+				<div>
+					<input className={statusStyle.editModeInput}
+							 placeholder="Set status"
+							 onChange={onChangeStatus}
+							 onBlur={deactivateEditMode}
+							 onKeyDown={e => {e.key === "Enter" && deactivateEditMode()}}
+							 autoFocus={true}
+							 value={status}
+							 maxLength="300"/>
+					<button type="submit"  onClick={deactivateEditMode}>Save</button>
+				</div>:
+				<span className={`${props.isMyProfile ? statusStyle.statusSpan : ""} 
+										${props.status ? profileStyle.profileStatusFilled : profileStyle.profileStatusEmpty}`}
+					onClick={activateEditMode}>{props.status || "Set status"}</span>}
 		</div>
 	)
 }

@@ -1,3 +1,17 @@
-.wall {
-    padding-left: 20px;
+.noPostsBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.noPostsText, .warningText{
+    color: #d5dfe9;
+    font-size: 20px;
+    font-weight: bold;
+}
+.warningBlock {
+    display: flex;
+    align-items: center;
+}
+.warningText {
+    padding-left: 30px;
 }

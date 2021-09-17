@@ -1,15 +1,15 @@
-import './App.css';
+import style from './App.module.css';
 import Navbar from "./components/Navbar/Navbar";
-import {Redirect, Route} from "react-router-dom";
-import MessagesContainer from "./components/Messages/MessagesContainer";
+import {Redirect, Route, Switch} from "react-router-dom";
 import UsersContainer from "./components/Users/UsersContainer";
 import ProfileContainer from "./components/Profile/ProfileContainer";
 import HeaderContainer from "./components/Header/HeaderContainer";
 import LoginContainer from "./components/Login/LoginContainer";
 import {connect} from "react-redux";
 import {getAuthData} from "./redux/reducers/authReducer";
-import {Component, useEffect} from "react";
+import {Component} from "react";
 import Preloader from "./components/common/Preloader/Preloader";
+import NotFound from "./components/common/DefaultPage/NotFound";
 
 class App extends Component
 {
@@ -24,16 +24,18 @@ class App extends Component
 		if (this.props.isFetching) {
 			return <Preloader/>
 		}
-		return (<div className="app-wrapper">
+		return (<div className={style.appWrapper}>
 
 			<HeaderContainer/>
 			<Navbar userID={this.props.userID}/>
-			<div className="app-wrapper-content">
-				<Route path="/profile/:id" render={() => <ProfileContainer/>}/>
-				<Route path="/messages" render={() => <MessagesContainer/>}/>
-				<Route path="/users" render={() => <UsersContainer/>}/>
-				<Route path="/login" render={() => <LoginContainer/>}/>
-				{/*<Route render={() => props.isAuth ? <Redirect to={`/profile/${props.userID}`}/> : <Redirect to="/login"/> }/>*/}
+			<div className={style.pageBody}>
+				<Switch>
+					<Route path="/profile/:id" render={() => <ProfileContainer/>}/>
+					<Route path="/users" render={() => <UsersContainer/>}/>
+					<Route path="/login" render={() => <LoginContainer/>}/>
+					<Route exact path="/" render={() => this.props.isAuth ? <Redirect to={`/profile/${this.props.userID}`}/> : <Redirect to="/login"/> }/>
+					<Route render={NotFound}/>
+				</Switch>
 			</div>
 		</div>);
 	}

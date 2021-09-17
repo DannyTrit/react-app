@@ -1,11 +1,36 @@
 .header {
-    grid-area: h;
+    grid-area: header;
+    display: flex;
     background-color: #242425;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+    justify-content: flex-end;
 }
 .header img {
     height: 50px;
 }
 .loginBlock {
-    background-color: beige;
-    float: right;
+    position: relative;
+    cursor: pointer;
+}
+.login {
+    display: block;
+    min-width: 100px;
+    color: beige;
+    background-color: #2d2d2d;
+    font-size: 20pt;
+    flex-grow: 1;
+    padding: 10px;
+    text-align: center;
+    font-weight: 700;
+}
+.logOutBtn {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 20px 0;
+    position: absolute;
+    flex-grow: 1;
+    top: 60px;
+    background-color: #e6ee0f;
 }

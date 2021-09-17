@@ -1,11 +1,13 @@
 import {Formik, Form} from "formik";
 import * as Yup from 'yup';
 import FormControls from "../../../common/FormControls/FormControls";
+import appStyle from "../../../../App.module.css";
+import newPostStyle from "./NewPost.module.css";
 
 const NewPost = (props) =>
 {
 	return (
-		<div>
+		<div className={appStyle.contentBlock}>
 			<Formik
 				initialValues={ { postText: ""} }
 				onSubmit={(values, {resetForm}) => {
@@ -21,7 +23,7 @@ const NewPost = (props) =>
 				})}
 			>
 				<Form>
-					<FormControls placeholder="Type new post..." control="textarea" name="postText"/>
+					<FormControls controlClassName={newPostStyle.textarea} placeholder="Type new post..." control="textarea" name="postText"/>
 					<button>Post</button>
 				</Form>
 			</Formik>

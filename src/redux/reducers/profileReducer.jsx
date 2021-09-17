@@ -3,13 +3,13 @@ const ADD_POST = "profileReducer/ADD-POST";
 const SET_USER_PROFILE = "profileReducer/SET-USER-PROFILE";
 const SET_USER_STATUS = "profileReducer/SET-USER-STATUS";
 const SET_USER_PHOTOS = "profileReducer/SET-USER-PHOTOS";
+const TOGGLE_IS_FETCHING = "profileReducer/TOGGLE-IS-FETCHING";
 
 const initialState = {
-	posts: [{id: 0, sender: "Vick", text: "That was hard", likeCount: 10},
-		{id: 1, sender: "Mike", text: "Rly man?", likeCount: 4}
-	],
+	posts: [],
 	profile: null,
-	status: null
+	status: null,
+	isFetching: false
 }
 
 const profileReducer = (state = initialState, action) =>
@@ -56,15 +56,23 @@ const profileReducer = (state = initialState, action) =>
 				}
 			}
 		}
+		case TOGGLE_IS_FETCHING:
+		{
+			return {
+				...state,
+				isFetching: action.isFetching
+			}
+		}
 		default:
 			return state;
 	}
 }
 
 export const addPost = (text) => ({type: ADD_POST, text});
-const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile})
+const setUserProfile = (profile) => ({type: SET_USER_PROFILE, profile});
 const setUserStatus = (status) => ({type: SET_USER_STATUS, status});
-const setUserPhoto = (photos) => ({type: SET_USER_PHOTOS, photos})
+const setUserPhoto = (photos) => ({type: SET_USER_PHOTOS, photos});
+const toggleIsFetching = (isFetching) => ({type: TOGGLE_IS_FETCHING, isFetching});
 
 export const requestStatus = (userID) => async (dispatch) =>
 {
@@ -81,8 +89,10 @@ export const setStatus = (status) => async (dispatch) =>
 }
 export const getProfile = (userID) => async (dispatch) =>
 {
+	dispatch(toggleIsFetching(true));
 	let data = await API.getProfile(userID);
 	dispatch(setUserProfile({...data}));
+	dispatch(toggleIsFetching(false));
 }
 export const setProfile = (profile, setResultCode) => async (dispatch) =>
 {
