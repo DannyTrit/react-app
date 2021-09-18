@@ -17,7 +17,10 @@ const ProfilePhoto = (props) =>
 				<img className={infoStyle.profilePhoto} src={props.photos.large || userDefault}/>
 			</div>
 			<div>
-				{props.isMyProfile && <input type="file" onChange={onSelectFile} accept="image/*"/>}
+				{props.isMyProfile && <label className={infoStyle.uploadPhoto}>
+					<input type="file" onChange={onSelectFile} accept="image/*"/>
+					Upload photo
+				</label>}
 			</div>
 		</div>
 	)

@@ -1,0 +1,37 @@
+.textError {
+    display: block;
+    padding: 3px;
+    float:right;
+    background-color: #d6dfe9;
+    border-radius: 5px;
+    border: 2px solid red;
+    margin-top: 3px;
+}
+.controlContainer {
+    display: flex;
+    padding: 10px;
+}
+.controlBlock {
+    flex-grow: 1;
+}
+.label
+{
+    color: #cbcbcb;
+    display: block;
+    width: 200px;
+    font-size: 15px;
+}
+.input, textarea {
+    display: block;
+    background-color: #d6dfe9;
+    border-radius: 5px;
+    border: 1px solid #383838;
+    outline: none;
+    font-size: 14px;
+    padding: 10px ;
+    width: calc(100% - 22px);
+}
+.textarea {
+    height: 50px;
+    resize: none;
+}

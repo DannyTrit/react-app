@@ -1,0 +1,15 @@
+.pageContent {
+    display: flex;
+    justify-content: center;
+}
+.formStyle {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.captchaBlock {
+    padding: 10px;
+}
+.captchaBlock img {
+    width: 100%;
+}

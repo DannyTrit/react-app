@@ -1,19 +1,26 @@
-.usersPage {
-    display: grid;
-    grid-template-columns: 800px;
-}
 .user:first-child {
     border-top: none;
 }
 .user {
+    display: flex;
     padding: 12px;
     border-top: 1px solid #858585;
-}
-.usersBlock {
-    padding: 0 20px;
 }
 .photo {
     width: 100px;
     height: 100px;
     border-radius: 50px;
+}
+.infoBlock {
+    display: flex;
+    flex-direction: column;
+    padding: 10px;
+}
+.userName {
+    font-size: 20px;
+    font-weight: bold;
+}
+.userStatus {
+    font-size: 15px;
+    color: #212121;
 }

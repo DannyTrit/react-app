@@ -20,14 +20,13 @@ class App extends Component
 
 	render()
 	{
-		console.log(`${this.props.isAuth} ${this.props.userID}`)
 		if (this.props.isFetching) {
 			return <Preloader/>
 		}
 		return (<div className={style.appWrapper}>
 
 			<HeaderContainer/>
-			<Navbar userID={this.props.userID}/>
+			<Navbar userID={this.props.userID} isAuth={this.props.isAuth}/>
 			<div className={style.pageBody}>
 				<Switch>
 					<Route path="/profile/:id" render={() => <ProfileContainer/>}/>

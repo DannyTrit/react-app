@@ -24,3 +24,21 @@ html {
     margin-left: calc(100vw - 100%);
     margin-right: 0;
 }
+.appButton {
+    background-color: #39f8ff;
+    border-radius: 5px;
+    border: 1px solid #383838;
+    font-size: 15px;
+    padding: 5px;
+    display: block;
+    text-align: center;
+    width: 100%;
+    cursor: pointer;
+}
+.errorMessageBlock {
+    background-color: #d6dfe9;
+    border-radius: 5px;
+    border: 1px solid red;
+    color: red;
+    padding: 10px;
+}

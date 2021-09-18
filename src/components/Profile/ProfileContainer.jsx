@@ -35,7 +35,6 @@ const ProfileContainer = (props) =>
 			/>
 		</div>
 	)
-
 }
 
 let mapStateToProps = (state) => ({

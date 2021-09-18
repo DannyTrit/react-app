@@ -1,5 +1,6 @@
-import {useMemo, useState} from "react";
-import style from "./Paginator.module.css";
+import {useMemo} from "react";
+import paginatorStyle from "./Paginator.module.css";
+import appStyle from "../../../App.module.css";
 
 const Paginator = ({currentPage, totalItemsCount, pageSize, portionSize= 10, onPageChanged}) =>
 {
@@ -45,13 +46,13 @@ const Paginator = ({currentPage, totalItemsCount, pageSize, portionSize= 10, onP
 	}
 
 	return(
-		<div className={style.paginatorBody}>
+		<div className={appStyle.contentBlock}>
 			{leftPortionBorder > 1 && <button onClick={toFirstPage}>First</button>}
 			<button disabled={currentPage === 1} onClick={toPreviousPage}>←</button>
 			{
 				pages.filter(page => page >= leftPortionBorder && page <= leftPortionBorder + portionSize - 1)
 				.map(page => {
-					return <span key={page} className={`${style.pageNumber} ${page === currentPage ? style.selectedPage : ""}`} onClick={() => onPageChanged(page)}>{page}</span>
+					return <span key={page} className={`${paginatorStyle.pageNumber} ${page === currentPage ? paginatorStyle.selectedPage : ""}`} onClick={() => onPageChanged(page)}>{page}</span>
 				})
 			}
 			<button disabled={currentPage === pageCount} onClick={toNextPage}>→</button>

@@ -94,14 +94,14 @@ export const getProfile = (userID) => async (dispatch) =>
 	dispatch(setUserProfile({...data}));
 	dispatch(toggleIsFetching(false));
 }
-export const setProfile = (profile, setResultCode) => async (dispatch) =>
+export const setProfile = (profile, setResult) => async (dispatch) =>
 {
 	let response = await API.setProfile(profile);
 	if(response.data.resultCode === 0)
 	{
 		dispatch(setUserProfile(profile))
 	}
-	setResultCode(response.data.resultCode);
+	setResult(response.data.resultCode, response.data.messages)
 }
 export const setPhoto = (file) => async (dispatch) =>
 {

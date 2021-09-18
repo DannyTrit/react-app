@@ -1,10 +1,15 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import appStyle from "../../../App.module.css";
 import profileStyle from "../Profile.module.css";
 import statusStyle from "./ProfileStatus.module.css"
+import controlsStyle from "../../common/FormControls/Controls.module.css";
 
 const ProfileStatus = (props) =>
 {
+	useEffect(() => {
+		setStatus(props.status)
+	},[props.status])
+
 	let [editMode, setEditMode] = useState(false);
 	let [status, setStatus] = useState(props.status);
 	
@@ -16,7 +21,7 @@ const ProfileStatus = (props) =>
 	{
 		if(status !== props.status)
 		{
-			props.setStatus(status)
+			props.setStatus(status);
 		}
 		setEditMode(false);
 	}
@@ -27,7 +32,7 @@ const ProfileStatus = (props) =>
 		<div className={`${appStyle.contentBlock}`}>
 			{editMode ?
 				<div>
-					<input className={statusStyle.editModeInput}
+					<input className={controlsStyle.input}
 							 placeholder="Set status"
 							 onChange={onChangeStatus}
 							 onBlur={deactivateEditMode}
