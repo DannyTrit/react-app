@@ -8,7 +8,8 @@ import {useState} from "react";
 
 const Login = (props) =>
 {
-	let [resultCode, setResultCode] = useState(-1);
+
+	let [resultCode, setResultCode] = useState(-2);
 	let [errorMessages, setErrorMessages] = useState([]);
 
 	const setResult = (resultCode, messages) =>
@@ -40,6 +41,7 @@ const Login = (props) =>
 				onSubmit={(values,{resetForm}) => {
 					props.logIn(values.email, values.password, values.rememberMe, values.captcha, setResult);
 					resetForm();
+					setResultCode(-1);
 				}}
 				validationSchema = {validationSchema}
 			>
@@ -54,7 +56,7 @@ const Login = (props) =>
 						<img src={props.captchaUrl}/>
 						<FormControls control="input" name="captcha"/>
 					</div>}
-					<button className={appStyle.appButton} type="submit">Log in</button>
+					<button disabled={resultCode === -1} className={appStyle.appButton} type="submit">Log in</button>
 				</Form>
 			</Formik>
 		</div>

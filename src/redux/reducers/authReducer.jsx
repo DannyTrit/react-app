@@ -65,14 +65,16 @@ export const logIn = (email, password, rememberMe, captcha, setResult) => async 
 	{
 		dispatch(getAuthData());
 	}
-	setResult(response.data.resultCode, response.data.messages);
+	else
+	{
+		setResult(response.data.resultCode, response.data.messages);
+	}
 }
 export const logOut = () => async (dispatch) =>
 {
 	let response = await API.logOut();
 	if(response.data.resultCode === 0)
 	{
-		//dispatch(setIsAuth(false));
 		dispatch(setAuthData(null,null,null, false));
 	}
 }
